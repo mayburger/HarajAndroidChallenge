@@ -92,6 +92,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
 
     implementation("org.ocpsoft.prettytime:prettytime:4.0.1.Final")
+    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 
     kapt(glideDependencies.glideCompiler)
     kapt(roomDependencies.compiler)

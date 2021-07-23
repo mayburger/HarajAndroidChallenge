@@ -8,8 +8,10 @@ object ImageViewBinding {
 
     @BindingAdapter("imageUrl")
     @JvmStatic
-    fun bindImageUrl(view: ImageView, url:String){
-        Glide.with(view.context).load(url).centerCrop().into(view)
+    fun bindImageUrl(view: ImageView, url:String?){
+        url?.let{
+            Glide.with(view.context).load(it).centerCrop().into(view)
+        }
     }
 
 }

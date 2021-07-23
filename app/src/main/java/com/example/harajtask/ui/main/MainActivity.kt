@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.harajtask.R
 import com.example.harajtask.data.ProductRepository
 import com.example.harajtask.databinding.ActivityMainBinding
+import com.example.harajtask.model.Product
+import com.example.harajtask.ui.detail.DetailActivity
 import com.example.harajtask.ui.main.adapters.ProductAdapter
 import com.example.harajtask.utils.constants.ListTypeConstant
 import com.example.harajtask.utils.viewBinding
@@ -28,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var productAdapter:ProductAdapter
-
     var listType = ListTypeConstant.LIST
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +69,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        productAdapter.setListener(object:ProductAdapter.Callback{
+            override fun onSelectedItem(product: Product) {
+                DetailActivity.startActivity(this@MainActivity, product)
+            }
+        })
 
         lifecycleScope.launch {
             viewModel.products.collectLatest {

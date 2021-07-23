@@ -28,6 +28,15 @@ class ProductAdapter(val context:Context): PagingDataAdapter<Product, BasePaging
     }
 
     var listType = 0
+    private var mListener: Callback? = null
+
+    interface Callback {
+        fun onSelectedItem(product: Product)
+    }
+
+    fun setListener(listener: Callback) {
+        this.mListener = listener
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -46,16 +55,22 @@ class ProductAdapter(val context:Context): PagingDataAdapter<Product, BasePaging
         }
     }
 
-    class ProductListViewHolder(private val binding: ItemProductListBinding) : BasePagingViewHolder<Product>(binding.root) {
+    inner class ProductListViewHolder(private val binding: ItemProductListBinding) : BasePagingViewHolder<Product>(binding.root) {
         override fun onBind(position: Int, data: Product) {
             binding.viewModel = ItemProductViewModel(data)
+            binding.root.setOnClickListener {
+                mListener?.onSelectedItem(data)
+            }
         }
     }
 
 
-    class ProductGridViewHolder(private val binding: ItemProductGridBinding) : BasePagingViewHolder<Product>(binding.root) {
+    inner class ProductGridViewHolder(private val binding: ItemProductGridBinding) : BasePagingViewHolder<Product>(binding.root) {
         override fun onBind(position: Int, data: Product) {
             binding.viewModel = ItemProductViewModel(data)
+            binding.root.setOnClickListener {
+                mListener?.onSelectedItem(data)
+            }
         }
     }
 
