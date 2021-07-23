@@ -12,11 +12,16 @@ Create a functional app with two screens to display information about Posts from
 
 First, a screen showing a list of Posts from the json file you'll find in `assets` folder.
 
-<img src="image1.png" height="450" alt="First Screen">
+
+<div class="column">
+<img src="list.png" height="450" alt="First Screen">
+  <img src="grid.png" height="450" alt="First Screen">
+  <img src="square.png" height="450" alt="First Screen">
+</div>
 
 Second, a screen that displays the information of a particular Post upon click events on the previous screen's list.
 
-<img src="image2.png" height="450" alt="Second Screen">
+<img src="detail.png" height="450" alt="Second Screen">
 
 The share button should open up Android's native share sheet to share the title of the Post with other apps.
 
