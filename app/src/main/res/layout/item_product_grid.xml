@@ -7,73 +7,82 @@
         <variable
             name="viewModel"
             type="com.example.harajtask.ui.main.adapters.ItemProductViewModel" />
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@drawable/shp_white_rounded_8dp"
         android:elevation="2dp"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardImage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            app:cardUseCompatPadding="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                app:imageUrl="@{viewModel.data.thumbURL}" />
-        </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardImage"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:imageUrl="@{viewModel.data.thumbURL}" />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:paddingBottom="16dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:orientation="vertical"
+            android:layout_height="150dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="0"
+                android:layout_marginTop="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="@{viewModel.data.title}"
                 android:textColor="@color/colorPrimary"
-                android:maxLines="2"
-                android:ellipsize="end"
                 android:textSize="16sp"
                 tools:text="Toyota Camry GLE 2021Toyota Camry GLE" />
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:textSize="12sp"
                 android:text="@{viewModel.time}"
-                android:textAlignment="textEnd" />
+                android:textAlignment="textEnd"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:visibility="@{viewModel.data.commentCount == 0 ? View.GONE : View.VISIBLE}"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="@{viewModel.data.commentCount == 0 ? View.GONE : View.VISIBLE}">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
                     android:text="@{viewModel.comments}"
+                    android:textSize="12sp"
                     tools:text="(32)" />
 
                 <ImageView
@@ -88,14 +97,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
                     android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
@@ -116,16 +124,16 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|end"
                     android:layout_weight="1"
+                    android:gravity="center_vertical|end"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.data.username}"
-                        android:maxLines="1"
                         android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@{viewModel.data.username}"
                         android:textSize="12sp"
                         tools:text="Abdel Rahman" />
 
@@ -138,10 +146,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-
         </LinearLayout>
-
 
     </LinearLayout>
 </layout>

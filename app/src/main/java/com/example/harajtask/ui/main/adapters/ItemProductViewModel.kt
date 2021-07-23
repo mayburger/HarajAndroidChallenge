@@ -14,4 +14,8 @@ class ItemProductViewModel(val data:Product){
         return pretty.format(cal)
     }
 
+    fun getComments():String{
+        return "(${data.commentCount})"
+    }
+
 }
