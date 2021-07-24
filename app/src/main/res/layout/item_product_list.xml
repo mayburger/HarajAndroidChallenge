@@ -7,10 +7,11 @@
         <variable
             name="viewModel"
             type="com.example.harajtask.ui.adapters.viewmodels.ItemProductViewModel" />
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -19,120 +20,16 @@
         android:orientation="horizontal"
         android:padding="8dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:text="@{viewModel.data.title}"
-                android:textColor="@color/colorPrimary"
-                android:maxLines="2"
-                android:ellipsize="end"
-                tools:text="Toyota Camry GLE 2021" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:textSize="12sp"
-                android:text="@{viewModel.time}"
-                android:textAlignment="textEnd" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:visibility="@{viewModel.data.commentCount == 0 ? View.GONE : View.VISIBLE}"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:text="@{viewModel.comments}"
-                    tools:text="(32)" />
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_chat" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|end"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.data.city}"
-                        android:textSize="12sp"
-                        tools:text="Riyadh" />
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:padding="2dp"
-                        android:src="@drawable/ic_location" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|end"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.data.username}"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:textSize="12sp"
-                        tools:text="Abdel Rahman" />
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:padding="2dp"
-                        android:src="@drawable/ic_person" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardImage"
             android:layout_width="120dp"
             android:layout_height="120dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:cardUseCompatPadding="true">
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/image"
@@ -141,6 +38,114 @@
                 app:imageUrl="@{viewModel.data.thumbURL}" />
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{viewModel.data.title}"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintRight_toLeftOf="@id/cardImage"
+            app:layout_constraintTop_toTopOf="@id/cardImage"
+            tools:text="Toyota Camry GLE 2021" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@{viewModel.time}"
+            android:textAlignment="textEnd"
+            android:textSize="12sp"
+            app:layout_constraintRight_toRightOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="3 months ago" />
+
+        <LinearLayout
+            android:id="@+id/viewComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="@{viewModel.data.commentCount == 0 ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/viewUsername"
+            app:layout_constraintRight_toRightOf="@id/viewUsername">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.comments}"
+                android:textSize="12sp"
+                tools:text="(32)" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:padding="4dp"
+                android:src="@drawable/ic_chat" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/viewCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/viewUsername"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/viewUsername"
+            app:layout_constraintTop_toTopOf="@id/viewUsername">
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.data.city}"
+                android:textSize="12sp"
+                tools:text="Riyadh" />
+
+            <ImageView
+                android:id="@+id/iconCity"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_location" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/viewUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/cardImage"
+            app:layout_constraintLeft_toRightOf="@id/viewCity"
+            app:layout_constraintRight_toLeftOf="@id/cardImage">
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{viewModel.data.username}"
+                android:textSize="12sp"
+                tools:text="Abdel Rahman" />
+
+            <ImageView
+                android:id="@+id/iconUsername"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_person" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -47,16 +47,24 @@ class DetailActivity : AppCompatActivity(), DetailNavigator{
             startActivity(shareIntent)
         }
 
-        handleArabicOrientation()
+        viewModel.product.value?.let{
+            it.title?.let {
+                binding.title.handleArabicOrientation(it)
+            }
+            it.city?.let {
+                binding.location.handleArabicOrientation(it)
+            }
+            it.username?.let {
+                binding.username.handleArabicOrientation(it)
+            }
+        }
     }
 
-    fun handleArabicOrientation(){
-        viewModel.product.value?.title?.let{ title->
-            if (title.isArabic()){
-                binding.title.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_START
-            } else{
-                binding.title.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_END
-            }
+    fun TextView.handleArabicOrientation(content:String){
+        if (content.isArabic()){
+            this.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_START
+        } else{
+            this.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_END
         }
     }
 

@@ -12,4 +12,5 @@ class Product(
     var city:String?=null,
     var date:Long?=null,
     var body:String?=null,
+    var profile_picture:String?=null
 ): Parcelable
