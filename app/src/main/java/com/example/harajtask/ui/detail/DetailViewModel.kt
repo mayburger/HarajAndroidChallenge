@@ -10,12 +10,17 @@ class DetailViewModel: ViewModel() {
 
     val product = MutableLiveData<Product>()
     val timestamp = MutableLiveData<String>()
+    var navigator:DetailNavigator? = null
 
     fun setProduct(product:Product){
         this.product.value = product
         val cal = Calendar.getInstance(Locale.ENGLISH)
         cal.timeInMillis = product.date?.times(1000) ?: 0
         this.timestamp.value = SimpleDateFormat("yyyy-MM-dd hh:mma").format(cal.time)
+    }
+
+    fun onBack(){
+        navigator?.onBack()
     }
 
 }

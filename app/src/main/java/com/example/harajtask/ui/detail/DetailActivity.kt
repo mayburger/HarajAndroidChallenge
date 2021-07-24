@@ -9,7 +9,7 @@ import com.example.harajtask.databinding.ActivityDetailBinding
 import com.example.harajtask.model.Product
 import com.example.harajtask.utils.viewBinding
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), DetailNavigator{
 
     companion object{
         const val EXTRA_PRODUCT = "extra_product"
@@ -29,6 +29,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        viewModel.navigator = this
 
         viewModel.setProduct(intent.getParcelableExtra(EXTRA_PRODUCT)!!)
 
@@ -43,4 +44,10 @@ class DetailActivity : AppCompatActivity() {
             startActivity(shareIntent)
         }
     }
+
+    override fun onBack() {
+        super.onBackPressed()
+    }
+
+
 }
