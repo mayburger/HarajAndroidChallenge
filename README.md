@@ -21,7 +21,10 @@ First, a screen showing a list of Posts from the json file you'll find in `asset
 
 Second, a screen that displays the information of a particular Post upon click events on the previous screen's list.
 
-<img src="detail.png" height="450" alt="Second Screen">
+<div class="column">
+<img src="detail1.png" height="450" alt="Second Screen">
+<img src="detail2.png" height="450" alt="Second Screen">
+</div>
 
 The share button should open up Android's native share sheet to share the title of the Post with other apps.
 
