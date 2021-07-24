@@ -3,6 +3,7 @@ package com.example.harajtask.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.harajtask.base.BasePagingViewHolder
@@ -11,6 +12,7 @@ import com.example.harajtask.databinding.ItemProductListBinding
 import com.example.harajtask.model.Product
 import com.example.harajtask.ui.adapters.viewmodels.ItemProductViewModel
 import com.example.harajtask.utils.constants.ListTypeConstant
+import com.example.harajtask.utils.isArabic
 
 class ProductAdapter(val context:Context): PagingDataAdapter<Product, BasePagingViewHolder<Product>>(
     ProductComparator
@@ -64,6 +66,11 @@ class ProductAdapter(val context:Context): PagingDataAdapter<Product, BasePaging
             binding.root.setOnClickListener {
                 mListener?.onSelectedItem(data)
             }
+            if (data.title?.isArabic() == true){
+                binding.title.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_START
+            } else{
+                binding.title.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_END
+            }
         }
     }
 
@@ -73,6 +80,11 @@ class ProductAdapter(val context:Context): PagingDataAdapter<Product, BasePaging
             binding.viewModel = ItemProductViewModel(data)
             binding.root.setOnClickListener {
                 mListener?.onSelectedItem(data)
+            }
+            if (data.title?.isArabic() == true){
+                binding.title.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_START
+            } else{
+                binding.title.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_END
             }
         }
     }

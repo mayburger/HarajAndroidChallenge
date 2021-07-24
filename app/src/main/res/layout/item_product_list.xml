@@ -23,19 +23,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginEnd="8dp"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
                 android:text="@{viewModel.data.title}"
                 android:textColor="@color/colorPrimary"
                 android:maxLines="2"
                 android:ellipsize="end"
-                tools:text="Toyota Camry GLE 2021Toyota Camry GLE" />
+                tools:text="Toyota Camry GLE 2021" />
 
             <TextView
                 android:layout_width="match_parent"

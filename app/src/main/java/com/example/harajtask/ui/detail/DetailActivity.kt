@@ -3,10 +3,13 @@ package com.example.harajtask.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.harajtask.databinding.ActivityDetailBinding
 import com.example.harajtask.model.Product
+import com.example.harajtask.utils.isArabic
 import com.example.harajtask.utils.viewBinding
 
 class DetailActivity : AppCompatActivity(), DetailNavigator{
@@ -42,6 +45,18 @@ class DetailActivity : AppCompatActivity(), DetailNavigator{
 
             val shareIntent = Intent.createChooser(sendIntent, null)
             startActivity(shareIntent)
+        }
+
+        handleArabicOrientation()
+    }
+
+    fun handleArabicOrientation(){
+        viewModel.product.value?.title?.let{ title->
+            if (title.isArabic()){
+                binding.title.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_START
+            } else{
+                binding.title.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_END
+            }
         }
     }
 

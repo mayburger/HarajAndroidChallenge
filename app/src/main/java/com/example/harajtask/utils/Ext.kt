@@ -64,6 +64,11 @@ fun Any.io(runnable:suspend ()->Unit){
         runnable.invoke()
     }
 }
+
+fun String.isArabic():Boolean{
+    return Character.getDirectionality(this[0]) == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC
+}
+
 fun Any.main(runnable:suspend ()->Unit){
     CoroutineScope(Main).launch {
         runnable.invoke()
