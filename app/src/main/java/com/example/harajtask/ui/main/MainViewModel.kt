@@ -1,6 +1,6 @@
 package com.example.harajtask.ui.main
 
-import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -11,6 +11,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(productRepository: ProductRepository):ViewModel() {
+
+    val isLoading = MutableLiveData(true)
 
     val products = Pager(PagingConfig(5)){
         val limit = 5
