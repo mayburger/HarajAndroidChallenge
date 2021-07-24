@@ -14,9 +14,9 @@ First, a screen showing a list of Posts from the json file you'll find in `asset
 
 
 <div class="column">
-<img src="list.png" height="450" alt="First Screen">
-  <img src="grid.png" height="450" alt="First Screen">
-  <img src="square.png" height="450" alt="First Screen">
+<img src="list-v2.png" height="450" alt="First Screen">
+  <img src="grid-v2.png" height="450" alt="First Screen">
+  <img src="square-v2.png" height="450" alt="First Screen">
 </div>
 
 Second, a screen that displays the information of a particular Post upon click events on the previous screen's list.
