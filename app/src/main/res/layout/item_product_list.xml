@@ -40,15 +40,17 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:textSize="16sp"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="@{viewModel.data.title}"
             android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/cardImage"
             app:layout_constraintTop_toTopOf="@id/cardImage"
             tools:text="Toyota Camry GLE 2021" />
@@ -72,7 +74,7 @@
             android:layout_gravity="end"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:visibility="@{viewModel.data.commentCount == 0 ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.data.commentCount == 0 ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/viewUsername"
             app:layout_constraintRight_toRightOf="@id/viewUsername">
 
