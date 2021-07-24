@@ -1,4 +1,4 @@
-package com.example.harajtask.ui.main.adapters
+package com.example.harajtask.ui.adapters.viewmodels
 
 import com.example.harajtask.model.Product
 import com.google.gson.internal.bind.util.ISO8601Utils

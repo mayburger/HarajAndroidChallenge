@@ -1,4 +1,4 @@
-package com.example.harajtask.ui.main.adapters
+package com.example.harajtask.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,9 +9,12 @@ import com.example.harajtask.base.BasePagingViewHolder
 import com.example.harajtask.databinding.ItemProductGridBinding
 import com.example.harajtask.databinding.ItemProductListBinding
 import com.example.harajtask.model.Product
+import com.example.harajtask.ui.adapters.viewmodels.ItemProductViewModel
 import com.example.harajtask.utils.constants.ListTypeConstant
 
-class ProductAdapter(val context:Context): PagingDataAdapter<Product, BasePagingViewHolder<Product>>(ProductComparator){
+class ProductAdapter(val context:Context): PagingDataAdapter<Product, BasePagingViewHolder<Product>>(
+    ProductComparator
+){
 
     companion object{
         private val ProductComparator = object : DiffUtil.ItemCallback<Product>() {

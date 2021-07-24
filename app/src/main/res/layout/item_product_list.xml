@@ -6,37 +6,23 @@
 
         <variable
             name="viewModel"
-            type="com.example.harajtask.ui.main.adapters.ItemProductViewModel" />
+            type="com.example.harajtask.ui.adapters.viewmodels.ItemProductViewModel" />
         <import type="android.view.View"/>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@drawable/shp_white_rounded_8dp"
         android:elevation="2dp"
         android:orientation="horizontal"
         android:padding="8dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardImage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            app:cardUseCompatPadding="true">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                app:imageUrl="@{viewModel.data.thumbURL}" />
-        </androidx.cardview.widget.CardView>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -139,8 +125,23 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:imageUrl="@{viewModel.data.thumbURL}" />
+        </androidx.cardview.widget.CardView>
 
 
     </LinearLayout>

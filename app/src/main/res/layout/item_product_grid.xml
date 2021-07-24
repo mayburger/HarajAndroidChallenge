@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.harajtask.ui.main.adapters.ItemProductViewModel" />
+            type="com.example.harajtask.ui.adapters.viewmodels.ItemProductViewModel" />
 
         <import type="android.view.View" />
     </data>
