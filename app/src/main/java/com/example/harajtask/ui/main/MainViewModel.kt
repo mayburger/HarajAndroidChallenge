@@ -1,13 +1,11 @@
 package com.example.harajtask.ui.main
 
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.example.harajtask.base.BaseNavigator
 import com.example.harajtask.base.BaseViewModel
 import com.example.harajtask.data.AppDataManager
 import com.example.harajtask.data.ProductPagingSource
-import com.example.harajtask.utils.constants.LoadStateConstant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

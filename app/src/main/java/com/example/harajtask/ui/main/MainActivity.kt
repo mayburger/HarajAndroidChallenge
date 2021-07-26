@@ -1,14 +1,9 @@
 package com.example.harajtask.ui.main
 
-import android.content.Context
-import android.hardware.SensorManager
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.harajtask.BR
@@ -16,13 +11,10 @@ import com.example.harajtask.R
 import com.example.harajtask.base.BaseActivity
 import com.example.harajtask.databinding.ActivityMainBinding
 import com.example.harajtask.model.Product
-import com.example.harajtask.ui.detail.DetailActivity
 import com.example.harajtask.ui.adapters.ProductAdapter
+import com.example.harajtask.ui.detail.DetailActivity
 import com.example.harajtask.utils.*
 import com.example.harajtask.utils.constants.ListTypeConstant
-import com.example.harajtask.utils.constants.LoadStateConstant
-import com.google.gson.Gson
-import com.readystatesoftware.chuck.Chuck
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

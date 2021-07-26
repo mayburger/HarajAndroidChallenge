@@ -10,8 +10,6 @@
             type="com.example.harajtask.ui.main.MainViewModel" />
 
         <import type="android.view.View" />
-
-        <import type="com.example.harajtask.utils.constants.LoadStateConstant" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
