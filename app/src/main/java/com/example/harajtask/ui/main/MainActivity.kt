@@ -1,31 +1,41 @@
 package com.example.harajtask.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.harajtask.BR
 import com.example.harajtask.R
+import com.example.harajtask.base.BaseActivity
 import com.example.harajtask.databinding.ActivityMainBinding
 import com.example.harajtask.model.Product
 import com.example.harajtask.ui.detail.DetailActivity
 import com.example.harajtask.ui.adapters.ProductAdapter
 import com.example.harajtask.utils.*
 import com.example.harajtask.utils.constants.ListTypeConstant
+import com.example.harajtask.utils.constants.LoadStateConstant
+import com.google.gson.Gson
+import com.readystatesoftware.chuck.Chuck
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
-    val binding by viewBinding(ActivityMainBinding::inflate)
-    val viewModel by viewModels<MainViewModel>()
+    override val bindingVariable: Int
+        get() = BR.viewModel
+    override val layoutId: Int
+        get() = R.layout.activity_main
+    override val viewModel: MainViewModel by viewModels()
 
     @Inject
     lateinit var productAdapter: ProductAdapter
@@ -33,8 +43,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         binding.recycler.apply {
@@ -42,6 +50,17 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
 
+        productAdapter.setListener(object : ProductAdapter.Callback {
+            override fun onSelectedItem(product: Product) {
+                DetailActivity.startActivity(this@MainActivity, product)
+            }
+        })
+
+        observeDataCollection()
+        handleViewTypeChanges()
+    }
+
+    fun handleViewTypeChanges(){
         binding.listType.setOnClickListener {
             when (listType) {
                 ListTypeConstant.LIST -> {
@@ -70,28 +89,39 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
-        productAdapter.setListener(object : ProductAdapter.Callback {
-            override fun onSelectedItem(product: Product) {
-                DetailActivity.startActivity(this@MainActivity, product)
-            }
-        })
-
-        io {
+    fun observeDataCollection(){
+        lifecycleScope.launch {
             viewModel.products.collectLatest {
-                kotlinx.coroutines.delay(1500)
-                viewModel.isLoading.postValue(false)
                 productAdapter.submitData(it)
             }
         }
 
-        viewModel.isLoading.observe(this,{
-            if (!it){
-                binding.recycler.fadeShow(duration = 1000)
-                binding.recycler.animToY(0f, duration = 1000)
+        binding.buttonRetry.setOnClickListener {
+            productAdapter.refresh()
+        }
+
+        productAdapter.addLoadStateListener {
+            if (it.refresh is LoadState.Loading){
+                binding.recycler.hide()
+                binding.progress.show()
+                // Error Views
+                binding.errorTitle.hide()
+                binding.errorDesc.hide()
+                binding.buttonRetry.hide()
+            } else if (it.refresh is LoadState.Error){
+                binding.recycler.hide()
+                binding.progress.hide()
+                // Error Views
+                binding.errorTitle.show()
+                binding.errorDesc.show()
+                binding.buttonRetry.show()
+            } else if (it.refresh !is LoadState.Loading && it.refresh !is LoadState.Error){
+                binding.progress.hide()
+                binding.recycler.fadeShow(duration = 800)
+                binding.recycler.animToY(0f, duration = 800)
             }
-        })
-
-
+        }
     }
 }

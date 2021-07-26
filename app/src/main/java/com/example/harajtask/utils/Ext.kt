@@ -65,6 +65,14 @@ fun Any.io(runnable:suspend ()->Unit){
     }
 }
 
+fun View.hide(){
+    this.visibility = View.GONE
+}
+
+fun View.show(){
+    this.visibility = View.VISIBLE
+}
+
 fun String.isArabic():Boolean{
     return Character.getDirectionality(this[0]) == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC
 }

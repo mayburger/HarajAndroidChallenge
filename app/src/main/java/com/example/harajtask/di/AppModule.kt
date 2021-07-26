@@ -2,7 +2,8 @@ package com.example.harajtask.di
 
 import android.app.Application
 import android.content.Context
-import com.example.harajtask.data.ProductRepository
+import com.example.harajtask.data.ApiService
+import com.example.harajtask.data.AppDataManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +21,12 @@ object AppModule {
 
     @Provides
     @Singleton
-    internal fun provideProductRepository(@ApplicationContext context: Context): ProductRepository = ProductRepository(context)
+    internal fun provideDataManager(context:Context, apiService: ApiService): AppDataManager {
+        return AppDataManager(context, apiService)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideApiHelper(): ApiService = ApiService.create()
 
 }

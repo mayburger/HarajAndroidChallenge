@@ -72,6 +72,9 @@ dependencies {
     implementation(jetpackDependencies.lifecycleLivedata)
     implementation(jetpackDependencies.lifecycleCoroutines)
 
+    debugImplementation(chuckDependencies.chuckDebug)
+    releaseImplementation(chuckDependencies.chuckRelease)
+
     implementation(hiltDependencies.hilt)
     implementation(hiltDependencies.hiltViewModel)
 
