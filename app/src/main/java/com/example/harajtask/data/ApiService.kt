@@ -35,7 +35,7 @@ interface ApiService {
     }
 
 
-    @GET("131f8565-87b1-467b-a756-18fa0375124d")
+    @GET("0c773c05-bf35-42ec-b92f-5211511e0cd1")
     suspend fun getProducts(): ArrayList<Product>
 
 }

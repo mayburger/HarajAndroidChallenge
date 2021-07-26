@@ -102,6 +102,7 @@ dependencies {
     kapt(roomDependencies.compiler)
     kapt(hiltDependencies.hiltCompiler)
     kapt(hiltDependencies.hiltAndroidXCompiler)
+    kapt("org.xerial:sqlite-jdbc:3.34.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")

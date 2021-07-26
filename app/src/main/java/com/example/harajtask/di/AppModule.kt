@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.example.harajtask.data.ApiService
 import com.example.harajtask.data.AppDataManager
+import com.example.harajtask.data.room.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,5 +29,9 @@ object AppModule {
     @Provides
     @Singleton
     internal fun provideApiHelper(): ApiService = ApiService.create()
+
+    @Singleton
+    @Provides
+    fun provideDatabase(@ApplicationContext appContext: Context) = AppDatabase.getDatabase(appContext)
 
 }
