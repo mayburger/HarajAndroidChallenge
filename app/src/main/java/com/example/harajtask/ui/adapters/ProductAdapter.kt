@@ -6,13 +6,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.example.harajtask.base.BasePagingViewHolder
 import com.example.harajtask.databinding.ItemProductGridBinding
 import com.example.harajtask.databinding.ItemProductListBinding
 import com.example.harajtask.model.Product
 import com.example.harajtask.ui.adapters.viewmodels.ItemProductViewModel
 import com.example.harajtask.utils.constants.ListTypeConstant
-import com.example.harajtask.utils.isArabic
+import com.example.harajtask.utils.ext.grid2
+import com.example.harajtask.utils.ext.isArabic
+import com.example.harajtask.utils.ext.vertical
 
 class ProductAdapter(val context:Context): PagingDataAdapter<Product, BasePagingViewHolder<Product>>(
     ProductComparator
@@ -25,6 +28,21 @@ class ProductAdapter(val context:Context): PagingDataAdapter<Product, BasePaging
             }
             override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean =
                 oldItem.equals(newItem)
+        }
+
+        fun ProductAdapter.list(recyclerView: RecyclerView){
+            recyclerView.vertical()
+            listType = ListTypeConstant.LIST
+        }
+
+        fun ProductAdapter.grid(recyclerView: RecyclerView){
+            recyclerView.grid2()
+            listType = ListTypeConstant.GRID
+        }
+
+        fun ProductAdapter.square(recyclerView: RecyclerView){
+            recyclerView.vertical()
+            listType = ListTypeConstant.SQUARE
         }
     }
 

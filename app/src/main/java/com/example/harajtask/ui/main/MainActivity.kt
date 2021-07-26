@@ -2,7 +2,6 @@ package com.example.harajtask.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,12 +11,15 @@ import com.example.harajtask.base.BaseActivity
 import com.example.harajtask.databinding.ActivityMainBinding
 import com.example.harajtask.model.Product
 import com.example.harajtask.ui.adapters.ProductAdapter
+import com.example.harajtask.ui.adapters.ProductAdapter.Companion.grid
+import com.example.harajtask.ui.adapters.ProductAdapter.Companion.list
+import com.example.harajtask.ui.adapters.ProductAdapter.Companion.square
 import com.example.harajtask.ui.detail.DetailActivity
 import com.example.harajtask.utils.*
 import com.example.harajtask.utils.constants.ListTypeConstant
+import com.example.harajtask.utils.ext.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -54,32 +56,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     fun handleViewTypeChanges(){
         binding.listType.setOnClickListener {
-            when (listType) {
+            when (productAdapter.listType) {
                 ListTypeConstant.LIST -> {
-                    listType = ListTypeConstant.SQUARE
-                    productAdapter.listType = ListTypeConstant.SQUARE
-                    binding.recycler.adapter = productAdapter
-                    binding.recycler.layoutManager = LinearLayoutManager(this@MainActivity)
+                    productAdapter.square(binding.recycler)
                     binding.listType.setImageResource(R.drawable.ic_square)
-                    binding.recycler.fadeShow(duration = 500)
                 }
                 ListTypeConstant.SQUARE -> {
-                    listType = ListTypeConstant.GRID
-                    productAdapter.listType = ListTypeConstant.GRID
-                    binding.recycler.adapter = productAdapter
-                    binding.recycler.layoutManager = GridLayoutManager(this@MainActivity, 2)
+                    productAdapter.grid(binding.recycler)
                     binding.listType.setImageResource(R.drawable.ic_grid)
-                    binding.recycler.fadeShow(duration = 500)
                 }
                 else -> {
-                    listType = ListTypeConstant.LIST
-                    productAdapter.listType = ListTypeConstant.LIST
-                    binding.recycler.adapter = productAdapter
-                    binding.recycler.layoutManager = LinearLayoutManager(this@MainActivity)
+                    productAdapter.list(binding.recycler)
                     binding.listType.setImageResource(R.drawable.ic_list)
-                    binding.recycler.fadeShow(duration = 500)
                 }
             }
+            binding.recycler.adapter = productAdapter
+            binding.recycler.fadeShow(duration = 500)
         }
     }
 
