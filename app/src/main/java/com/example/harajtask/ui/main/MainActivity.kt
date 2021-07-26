@@ -84,7 +84,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     fun observeDataCollection(){
-        lifecycleScope.launch {
+        io{
             viewModel.products.collectLatest {
                 productAdapter.submitData(it)
             }

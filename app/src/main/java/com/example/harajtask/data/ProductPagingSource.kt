@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.harajtask.data.room.AppDatabase
 import com.example.harajtask.model.Product
+import com.example.harajtask.utils.io
 
 class ProductPagingSource(val apiService: ApiService, val appDatabase:AppDatabase, val limit: Int = 10) : PagingSource<Int, Product>() {
 
