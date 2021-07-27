@@ -15,6 +15,10 @@ fun View.show(){
     this.visibility = View.VISIBLE
 }
 
+fun View.isHidden():Boolean{
+    return (visibility == View.GONE || visibility == View.INVISIBLE || alpha == 0f)
+}
+
 fun View.animToY(
     y: Float,
     animate: Boolean? = true,
